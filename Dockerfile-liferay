@@ -1,0 +1,20 @@
+FROM yanshah/liferayportalce:6.2ga6
+
+# /var/liferay-home/
+
+
+# LICENSE  NOTICE  RELEASE-NOTES  RUNNING.txt  bin  conf  lib  logs  temp  webapps  work
+COPY ./liferay_conf/portal-ext.properties /var/liferay-home/
+COPY ./liferay_conf/tomcat/bin/setenv.sh /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/bin/
+COPY ./liferay_conf/tomcat/lib/ext/*.jar /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/lib/ext/
+COPY ./liferay_conf/deploy/ /var/liferay-home/deploy/
+# Configure Tomcat session cluster
+COPY ./liferay_conf/tomcat/conf/context.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/conf/
+COPY ./liferay_conf/tomcat/conf/server.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/conf/
+#COPY ./liferay_conf/tomcat/conf/web.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/conf/
+COPY ./liferay_conf/tomcat/conf/redisson.yaml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/conf/
+#COPY ./liferay_conf/tomcat/conf/web-root.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/webapps/ROOT/WEB-INF/web.xml
+
+
+#COPY ./liferay_conf/tomcat/conf/web.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/conf/
+#COPY ./liferay_conf/tomcat/conf/web-root.xml /opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/webapps/ROOT/WEB-INF/web.xml

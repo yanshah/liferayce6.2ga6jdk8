@@ -1,0 +1,58 @@
+version: '3.0'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    links:
+      - liferay-portal-node-1
+      - liferay-portal-node-2
+    ports:
+      - '80:80'
+  liferay-portal-node-3:
+    build:
+      context: .
+      dockerfile: Dockerfile-liferay
+    hostname: liferay-portal-node-3.local
+    volumes:
+      - /liferay_cluster/shared-directory/document_library/:/shared-directory/document_library
+    links:
+      - redis
+      - liferay-portal-node-1
+    ports:
+      - '9003:9000'
+      - '5080:8080'
+      - '8082:8085'    
+  liferay-portal-node-2:
+    build:
+      context: .
+      dockerfile: Dockerfile-liferay
+    hostname: liferay-portal-node-2.local
+    volumes:
+      - /liferay_cluster/shared-directory/document_library/:/shared-directory/document_library
+    links:
+      - redis
+      - liferay-portal-node-1
+    ports:
+      - '9002:9000'
+      - '7080:8080'
+      - '8084:8085'
+  liferay-portal-node-1:
+    build:
+      context: .
+      dockerfile: Dockerfile-liferay
+    hostname: liferay-portal-node-1.local
+    volumes:
+      - /liferay_cluster/shared-directory/document_library/:/shared-directory/document_library
+    links:
+      - redis
+    ports:
+      - '9001:9001'
+      - '6080:8080'
+      - '8083:8085'
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile-redis
+    ports:
+      - '6379:6379' 
