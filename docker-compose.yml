@@ -9,20 +9,20 @@ services:
       - liferay-portal-node-2
     ports:
       - '80:80'
-  liferay-portal-node-3:
-    build:
-      context: .
-      dockerfile: Dockerfile-liferay
-    hostname: liferay-portal-node-3.local
-    volumes:
-      - /liferay_cluster/shared-directory/document_library/:/shared-directory/document_library
-    links:
-      - redis
-      - liferay-portal-node-1
-    ports:
-      - '9003:9000'
-      - '5080:8080'
-      - '8082:8085'    
+ # liferay-portal-node-3:
+  #  build:
+  #    context: .
+   #   dockerfile: Dockerfile-liferay
+  # hostname: liferay-portal-node-3.local
+  #  volumes:
+  #    - /liferay_cluster/shared-directory/document_library/:/shared-directory/document_library
+  #  links:
+   #   - redis
+   #   - liferay-portal-node-1
+   # ports:
+  #    - '9003:9000'
+   #   - '5080:8080'
+   #   - '8082:8085'    
   liferay-portal-node-2:
     build:
       context: .
